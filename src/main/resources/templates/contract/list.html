@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>MyProject_02</title>
+    <link rel="stylesheet" th:href="@{/css/contract/list.css}">
+</head>
+<body>
+    <h1>Contract管理システム</h1>
+    <h2>Contract一覧(2025年4月～7月)</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>年月</th>
+            <th>ドル貨</th>
+            <th>為替レート</th>
+            <th>円貨</th>
+        </tr>
+        <tr th:each="data : ${contractlist}">
+            <td th:text="${data.id}"></td>
+            <td th:text="${data.dates}"></td>
+            <td th:text="${data.dollar}"></td>
+            <td th:text="${data.rate}"></td>
+            <td th:text="${data.yen}"></td>
+        </tr>
+    </table>
+</body>
+</html>
