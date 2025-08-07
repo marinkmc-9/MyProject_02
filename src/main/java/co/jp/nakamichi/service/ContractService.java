@@ -3,6 +3,7 @@ package co.jp.nakamichi.service;
 import java.util.List;//List
 
 import org.springframework.stereotype.Service;//Service
+import org.springframework.transaction.annotation.Transactional;//@Transactional
 import co.jp.nakamichi.entity.Contract;//entity
 import co.jp.nakamichi.repository.ContractRepository;//repository
 
@@ -19,4 +20,12 @@ public class ContractService {
         // リポジトリのfindAllメソッドを呼び出す
         return contractRepository.findAll();
     }
+
+    //----追加：ここから----
+    /** Contractの登録を行う */
+    @Transactional
+    public Contract saveContract(Contract contract) {
+            return contractRepository.save(contract);
+    }
+    //----追加：ここまで----
 }

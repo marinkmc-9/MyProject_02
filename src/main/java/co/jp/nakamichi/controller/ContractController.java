@@ -3,8 +3,11 @@ package co.jp.nakamichi.controller;
 import org.springframework.stereotype.Controller;//Controller
 import org.springframework.ui.Model;//Model
 import org.springframework.web.bind.annotation.GetMapping;//GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute;//ModelAttribute
+import org.springframework.web.bind.annotation.PostMapping;//PostMapping
 import org.springframework.web.bind.annotation.RequestMapping;//RequestMapping
 
+import co.jp.nakamichi.entity.Contract;//entity
 import co.jp.nakamichi.service.ContractService;//Service
 
 @Controller
@@ -25,6 +28,22 @@ public class ContractController {
         return "contract/list";
     }
 
+    //----追加：ここから----
+    /** Contract登録画面を表示 */
+    @GetMapping("/register")
+    public String getRegister(@ModelAttribute Contract contract) {
+        // Contract登録画面に遷移
+        return "contract/register";
 
+    }
 
+    /** Contract登録処理 */
+    @PostMapping ("/register")
+    public String postRegister(Contract contract) {
+        //Contract登録
+        service.saveContract(contract);
+        //一般画面にリダイレクト
+        return "redirect:/contract/list";
+    }
+    //----追加：ここまで----
 }
