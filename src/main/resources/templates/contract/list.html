@@ -8,29 +8,32 @@
 <body>
     <h1>Contract管理システム</h1>
     <h2>Contract一覧(2025年4月～7月)</h2>
-    <a th:href="@{/contract/register}">Contract登録</a>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>年月</th>
-            <th>ドル貨</th>
-            <th>為替レート</th>
-            <th>円貨</th>
-            <!-- 追加ここから -->
-            <th></th>
-            <!-- 追加ここまで -->
-        </tr>
-        <tr th:each="data : ${contractlist}">
-            <td th:text="${data.id}"></td>
-            <td th:text="${data.dates}"></td>
-            <td th:text="${data.dollar}"></td>
-            <td th:text="${data.rate}"></td>
-            <td th:text="${data.yen}"></td>
-            <!-- 追加ここから -->
-            <td>
-                <a th:href="@{/contract/update/{id}/(id=${data.id})}">更新</a>            </td>
-            <!-- 追加ここまで -->
-        </tr>
-    </table>
+    <!-- 変更ここから -->
+    <form name="frm" method="post" th:action="@{/contract/list}">
+        <a th:href="@{/contract/register}">Contract登録</a>
+        <input type="submit" name="deleteRun" id="deleteRun" value="(選択)したContractを一括削除">
+        <table>
+            <tr>
+                <th class="center">(選択)</th>
+                <th>ID</th>
+                <th>年月</th>
+                <th>ドル貨</th>
+                <th>為替レート</th>
+                <th>円貨</th>
+                <th></th>
+            </tr>
+            <tr th:each="data : ${contractlist}">
+                <td class ="center"><input type="checkbox" name="idck" th:value="${data.id}"></td>
+                <td th:text="${data.id}"></td>
+                <td th:text="${data.dates}"></td>
+                <td th:text="${data.dollar}"></td>
+                <td th:text="${data.rate}"></td>
+                <td th:text="${data.yen}"></td>
+                <td><a th:href="@{/contract/update/{id}/(id=${data.id})}">更新</a></td>
+            </tr>
+        </table>
+    </form>
+    <script th:src="@{/js/contract/list.js}"></script>
+    <!-- 変更ここまで -->
 </body>
 </html>

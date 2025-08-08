@@ -1,5 +1,7 @@
 package co.jp.nakamichi.controller;
 
+import java.util.Set;
+
 import org.springframework.stereotype.Controller;//Controller
 import org.springframework.ui.Model;//Model
 import org.springframework.web.bind.annotation.GetMapping;//GetMapping
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;//ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable;//PathVariable
 import org.springframework.web.bind.annotation.PostMapping;//PostMapping
 import org.springframework.web.bind.annotation.RequestMapping;//RequestMapping
+import org.springframework.web.bind.annotation.RequestParam;//RequestParam
 
 import co.jp.nakamichi.entity.Contract;//entity
 import co.jp.nakamichi.service.ContractService;//Service
@@ -46,7 +49,7 @@ public class ContractController {
         return "redirect:/contract/list";
     }
 
-    //----追加：ここから----
+
     /**Contract更新画面を表示 */
     @GetMapping("/update/{id}/")
     public String getContract(@PathVariable("id")Integer id, Model model ) {
@@ -63,6 +66,17 @@ public class ContractController {
         service.saveContract(contract);
         //一覧画面にリダイレクト
         return "redirect:/contract/list";
+    }
+
+    //----追加：ここから----
+    /** Contract削除処理*/
+    @PostMapping(path="list", params="deleteRun")
+    public String deleteRun(@RequestParam(name="idck") Set<Integer> idck, Model model) {
+        //Contractを一括削除
+        service.deleteContract(idck);
+        //一覧画面にリダイレクト
+        return "redirect:/contract/list";
+
     }
     //----追加：ここまで----
 }

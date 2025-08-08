@@ -1,6 +1,7 @@
 package co.jp.nakamichi.service;
 
 import java.util.List;//List
+import java.util.Set;//Set
 
 import org.springframework.stereotype.Service;//Service
 import org.springframework.transaction.annotation.Transactional;//@Transactional
@@ -21,12 +22,10 @@ public class ContractService {
         return contractRepository.findAll();
     }
 
-    //----追加：ここから----
     /** Contractを1件検索して返す */
     public Contract getContract(Integer id) {
         return contractRepository.findById(id).get();
     }
-    //----追加：ここまで----
 
     /** Contractの登録を行う */
     @Transactional
@@ -34,4 +33,13 @@ public class ContractService {
             return contractRepository.save(contract);
     }
 
+    //----追加：ここから----
+    /** Contractの削除を行なう*/
+    @Transactional
+    public void deleteContract(Set<Integer> idck) {
+        for(Integer id : idck) {
+            contractRepository.deleteById(id);
+        }
+    }
+    //----追加：ここまで----
 }
