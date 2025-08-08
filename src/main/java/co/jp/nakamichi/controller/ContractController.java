@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;//Controller
 import org.springframework.ui.Model;//Model
 import org.springframework.web.bind.annotation.GetMapping;//GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute;//ModelAttribute
+import org.springframework.web.bind.annotation.PathVariable;//PathVariable
 import org.springframework.web.bind.annotation.PostMapping;//PostMapping
 import org.springframework.web.bind.annotation.RequestMapping;//RequestMapping
 
@@ -28,7 +29,6 @@ public class ContractController {
         return "contract/list";
     }
 
-    //----追加：ここから----
     /** Contract登録画面を表示 */
     @GetMapping("/register")
     public String getRegister(@ModelAttribute Contract contract) {
@@ -43,6 +43,25 @@ public class ContractController {
         //Contract登録
         service.saveContract(contract);
         //一般画面にリダイレクト
+        return "redirect:/contract/list";
+    }
+
+    //----追加：ここから----
+    /**Contract更新画面を表示 */
+    @GetMapping("/update/{id}/")
+    public String getContract(@PathVariable("id")Integer id, Model model ) {
+        //Modelに登録
+        model.addAttribute("contract",service.getContract(id));
+        //Contract更新画面に遷移
+        return "contract/update";
+    }
+
+    /** Contract更新画面 */
+    @PostMapping("/update/{id}/")
+    public String PostContract(Contract contract) {
+        //Contract登録
+        service.saveContract(contract);
+        //一覧画面にリダイレクト
         return "redirect:/contract/list";
     }
     //----追加：ここまで----

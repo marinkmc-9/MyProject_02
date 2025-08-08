@@ -22,10 +22,16 @@ public class ContractService {
     }
 
     //----追加：ここから----
+    /** Contractを1件検索して返す */
+    public Contract getContract(Integer id) {
+        return contractRepository.findById(id).get();
+    }
+    //----追加：ここまで----
+
     /** Contractの登録を行う */
     @Transactional
     public Contract saveContract(Contract contract) {
             return contractRepository.save(contract);
     }
-    //----追加：ここまで----
+
 }

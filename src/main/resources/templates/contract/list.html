@@ -16,6 +16,9 @@
             <th>ドル貨</th>
             <th>為替レート</th>
             <th>円貨</th>
+            <!-- 追加ここから -->
+            <th></th>
+            <!-- 追加ここまで -->
         </tr>
         <tr th:each="data : ${contractlist}">
             <td th:text="${data.id}"></td>
@@ -23,6 +26,10 @@
             <td th:text="${data.dollar}"></td>
             <td th:text="${data.rate}"></td>
             <td th:text="${data.yen}"></td>
+            <!-- 追加ここから -->
+            <td>
+                <a th:href="@{/contract/update/{id}/(id=${data.id})}">更新</a>            </td>
+            <!-- 追加ここまで -->
         </tr>
     </table>
 </body>

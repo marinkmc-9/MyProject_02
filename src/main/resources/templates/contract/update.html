@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>MyProject_02</title>
+    <link rel="stylesheet" th:href="@{/css/contract/update.css}">
+</head>
+<body>
+    <h1>Contract管理システム</h1>
+    <h2>Contract更新</h2>
+    <form method="post" th:action="@{/contract/update/{id}/(id=${contract.id})}" th:object="${contract}">
+        <label for= "id">ID</label>
+        <input type="hidden" id="id" name="id" th:value="*{id}" th:text="*{id}">
+        <br>
+        <label for="dates">日付</label>
+        <input type="text" th:field="*{dates}">
+        <br>
+        <label for="dollar">ドル貨</label>
+        <input type="text" th:field="*{dollar}">
+        <br>
+        <label for="rate">為替レート</label>
+        <input type="text" th:field="*{rate}">
+        <br>
+        <label for="yen">円貨</label>
+        <input type="text" th:field="*{yen}">
+        <br>
+        <br>
+        <input type="submit" value="更新実行">
+        <a th:href="@{/contract/list}">更新せずに一覧に戻る</a>
+    </form>
+</body>
+</html>
