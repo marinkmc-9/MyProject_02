@@ -10,16 +10,20 @@
     <h2>Contract登録</h2>
     <form method="post" th:action="@{/contract/register}" th:object="${contract}">
         <label for="dates">年月</label>
-        <input type="text" th:field="*{dates}">
+        <input type="text" th:field="*{dates}" th:errorclass="err">
+        <span th:errors="*{dates}" class="err"></span>
         <br>
         <label for="dollar">ドル貨</label>
-        <input type="text" th:field="*{dollar}">
+        <input type="text" th:field="*{dollar}" th:errorclass="err">
+        <span th:errors="*{dollar}" class="err"></span>
         <br>
         <label for="rate">為替レート</label>
-        <input type="text" th:field="*{rate}">
+        <input type="text" th:field="*{rate}" th:errorclass="err">
+        <span th:errors="*{rate}" class="err"></span>
         <br>
         <label for="yen">円貨</label>
-        <input type="text" th:field="*{yen}">
+        <input type="text" th:field="*{yen}" th:errorclass="err">
+        <span th:errors="*{yen}" class="err"></span>
         <br>
         <br>
         <input type="submit" value="登録実行">

@@ -4,6 +4,8 @@ import java.util.Set;
 
 import org.springframework.stereotype.Controller;//Controller
 import org.springframework.ui.Model;//Model
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;//GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute;//ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable;//PathVariable
@@ -40,15 +42,20 @@ public class ContractController {
 
     }
 
+    //----追加：ここから----
     /** Contract登録処理 */
     @PostMapping ("/register")
-    public String postRegister(Contract contract) {
+    public String postRegister(@Validated Contract contract, BindingResult res, Model model) {
+        if(res.hasErrors()) {
+            //エラーあり
+            return getRegister(contract);
+        }
         //Contract登録
         service.saveContract(contract);
         //一般画面にリダイレクト
         return "redirect:/contract/list";
     }
-
+    //----追加：ここまで----
 
     /**Contract更新画面を表示 */
     @GetMapping("/update/{id}/")
@@ -68,7 +75,7 @@ public class ContractController {
         return "redirect:/contract/list";
     }
 
-    //----追加：ここから----
+
     /** Contract削除処理*/
     @PostMapping(path="list", params="deleteRun")
     public String deleteRun(@RequestParam(name="idck") Set<Integer> idck, Model model) {
@@ -78,5 +85,5 @@ public class ContractController {
         return "redirect:/contract/list";
 
     }
-    //----追加：ここまで----
+
 }
